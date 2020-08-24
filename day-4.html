@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+
+//Using the clone () method
+
+$(document).ready(function(){
+  $("button").click(function(){
+    $('.div1 p:eq(0)').clone().insertBefore('.div1 p:last-child');
+
+  });
+});
+
+
+
+
+
+</script>
+</head>
+<body>
+
+
+    <div class="div1">
+        <p> My name is Jospeh</p>
+
+        <p> My name is Danny</p>
+        <p> My name is Sabias</p>
+        <p> My name is Nick</p>
+
+
+        <p> The end of the paragraph</p>
+    </div>
+
+    <button>Click here</button> 
+</body>
+</html>

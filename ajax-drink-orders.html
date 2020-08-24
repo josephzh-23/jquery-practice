@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    
+        <h1> Coffee Orders</h1>
+        <ul id="orders">
+          
+        </ul>
+    
+        <h4> Add a coffee order</h4>
+        <p>name: <input type="text" id="name"></p>
+        <p>drink: <input type="text" id="drink"></p>
+    
+        <button id ="add-order"> Add! </button>
+    
+    
+   <script>
+
+       //Part 1 getting the drinks 
+       $(document).ready(function(){
+        var $orders = $('#orders');
+
+        var $drink = $('#drink');
+        var $name= $('#name');
+        $.ajax({
+            type: 'GET',
+            url: '/api/orders/sample.json',
+            success:function(orders){
+
+                $.each(orders, function(i, order){
+                    $orders.append('<li>name:' +order.name +'.drink:'
+                    + order.drink +'</li>');
+                    
+                });
+            },error:function(){
+                alert('error loading orders');
+            }
+       })
+
+       //Part 2: submitting a post request using Ajax
+       $('#add-order').on('click', function(){
+
+            var order = {
+                name: $name.val(),
+                drink: $drink.val(),
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/orders',
+                data:order,
+                success:function(newOrder){
+                $orders.append('<li>name:' +order.name +'.drink:'
+                    + order.drink +'</li>');
+                }, 
+                error: function(){
+                    alert('error saving order');
+                }
+            })
+       })
+       })
+   </script>
+</body>
+</html>
